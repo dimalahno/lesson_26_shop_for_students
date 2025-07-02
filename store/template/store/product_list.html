@@ -8,9 +8,23 @@
 </head>
 <body>
 <h1>Список товаров</h1>
+
+<div class="nav-buttons">
+    {% if user.is_authenticated %}
+        <span class="greeting">Привет, {{ user.username }}!</span>
+        <a href="{% url 'logout' %}" class="button-link">Выход</a>
+    {% else %}
+        <a href="{% url 'login' %}" class="button-link">Вход</a>
+        <a href="{% url 'register' %}" class="button-link">Регистрация</a>
+    {% endif %}
+</div>
+
 {% if user.is_authenticated %}
-    <a href="{% url 'add_product' %}">Добавить товар</a>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{% url 'add_product' %}" class="button-link">Добавить товар</a>
+    </div>
 {% endif %}
+
 <ul>
     {% for product in products %}
     <li>
